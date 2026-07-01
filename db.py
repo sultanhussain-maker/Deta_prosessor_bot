@@ -1,26 +1,12 @@
-# app/users/db.py
+# app/payments/db.py
 import json, os
-DB_FILE = "users.json"
+PAY_DB = "payments.json"
 
-def load_db():
-    if not os.path.exists(DB_FILE):
-        return {}
-    return json.load(open(DB_FILE))
+def load_payments():
+    if not os.path.exists(PAY_DB): return []
+    return json.load(open(PAY_DB))
 
-def save_db(db):
-    json.dump(db, open(DB_FILE, "w"), indent=2)
-
-def get_user(uid):
-    db = load_db()
-    return db.get(str(uid), {
-        "sub_active": False,
-        "vip": False,
-        "files_today": 0,
-        "files_month": 0,
-        "admin": False
-    })
-
-def update_user(uid, data):
-    db = load_db()
-    db[str(uid)] = data
-    save_db(db)
+def save_payment(p):
+    pays = load_payments()
+    pays.append(p)
+    json.dump(pays, open(PAY_DB, "w"), indent=2)
