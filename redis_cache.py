@@ -11,6 +11,7 @@ def get_cached_report(content: bytes):
     k = make_key(content)
     val = r.get(k)
     return val.decode() if val else None
+#
 
 def set_cached_report(content: bytes, report: str):
     k = make_key(content)
