@@ -12,7 +12,7 @@ def get_cached_report(content: bytes):
     val = r.get(k)
     return val.decode() if val else None
 #
-
+#
 def set_cached_report(content: bytes, report: str):
     k = make_key(content)
     r.set(k, report, ex=3600)
